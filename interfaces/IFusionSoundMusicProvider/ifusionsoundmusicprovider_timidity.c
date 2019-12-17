@@ -363,7 +363,7 @@ IFusionSoundMusicProvider_Timidity_PlayToStream(
      Timidity_Stop( data, false );
      
      direct_stream_seek( data->st, 0 );
-     stream = mid_istream_open_callbacks( read_callback, close_callback, data );
+     stream = mid_istream_open_callbacks( read_callback, mid_istream_seek, mid_istream_tell, close_callback, data );
      if (!stream) {
           D_ERROR( "IFusionSoundMusicProvider_Timidity: couldn't open input stream!\n" );
           pthread_mutex_unlock( &data->lock );
@@ -510,7 +510,7 @@ IFusionSoundMusicProvider_Timidity_PlayToBuffer(
      Timidity_Stop( data, false );
 
      direct_stream_seek( data->st, 0 );
-     stream = mid_istream_open_callbacks( read_callback, close_callback, data );
+     stream = mid_istream_open_callbacks( read_callback, mid_istream_seek, mid_istream_tell, close_callback, data );
      if (!stream) {
           D_ERROR( "IFusionSoundMusicProvider_Timidity: couldn't open input stream!\n" );
           pthread_mutex_unlock( &data->lock );
